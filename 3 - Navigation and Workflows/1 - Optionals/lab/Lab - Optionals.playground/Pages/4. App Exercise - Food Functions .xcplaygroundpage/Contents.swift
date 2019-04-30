@@ -14,13 +14,19 @@ struct Meal {
 }
 
 var meals: [String: Meal] = ["Breakfast": Meal(food: ["Bagel", "Orange Juice", "Egg Whites"], calories: 530)]
-
+func didEat(_ mealName: String) -> Meal? {
+    return meals[mealName]
+}
+print(String(describing: didEat("Breakfast")))
+print(String(describing: didEat("Lunch")))
 
 /*:
  iOS comes with a few different APIs for persistence, or saving data. You'll learn more about persistence in another lesson, but for now imagine what an app experience would be like if every time you opened the app all of your data was gone. That would be frustrating, right?
  
  Write a function that will check to see if your meal log (a dictionary like that in the previous exercise) is saved to the device. If it is, return the meal log. If it isn't, return an empty dictionary of type `[String: Any]`. The code you should use in this exercise for retrieving something saved to the device is `UserDefaults.standard.dictionary(forKey: "mealLog")`. This code will return an optional `[String: Any]`. If it return a value, that is your meal log. If it returns `nil`, then no meal log has been saved. Call the function and print the return value.
  */
-
-
+func storedMealLog() -> [String: Any] {
+    return UserDefaults.standard.dictionary(forKey: "mealLog") ?? [:]
+}
+print(storedMealLog()) // [:]
 //: [Previous](@previous)  |  page 4 of 6  |  [Next: Exercise - Failable Initializers](@next)
